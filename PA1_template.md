@@ -85,8 +85,7 @@ Here is a long and time consuming way to calculate total number of steps each da
 1. Make a new data frame called **average_steps_df** with average number of steps for each interval
 2. Create a new variable for **average_steps_df** data frame called **interval_time**. We want this new variable to hold the times from **interval** column but in POSIXct format. This will later become the x-axis of our time series plot.
 3. Make the time series plot using **interval_time** variable from previous step as x-axis, and average number of steps as y-axis.
-4. Find which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps.
-We will find this interval and show it both as time (%H:%M format) and as numeric (similar the numbers of *interval* column in our original data frame) (using **lubridate** package)
+4. Find which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps. We will show it as time (%H:%M format):
 
 
 
@@ -141,8 +140,7 @@ max_steps_time <-
         average_steps_df[average_steps_df$average_step == max_steps,]$interval_time     ## time in day with
                                                                                         ## maximum average
                                                                                         ## number of steps
-max_step_minute <- hour(max_steps_time) * 60 + minute(max_steps_time)       ## convert above time to minutes,
-                                                                            ## and get a numeric representation
+max_steps_time_char <- paste(hour(max_steps_time), minute(max_steps_time), sep = ":")
 
 # Extra: add the previous point to the time series plot
 axis(1, at = max_steps_time, 
@@ -158,7 +156,7 @@ text(average_steps_df$interval_time[130], 190, labels = "<---------------", col 
 
 ![](PA1_template_files/figure-html/time_series_plot-1.png)<!-- -->
 
-Average number of steps across all days is reached in **515** interval (**max_step_minute** variable in above code).
+Average number of steps across all days is reached in **8:35** interval (**max_steps_time_char** variable in above code).
 
 ## Imputing missing values
 
